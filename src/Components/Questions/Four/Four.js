@@ -31,13 +31,13 @@ const Four = ({ questionOne, questionTwo, changeEvent, ...otherProps }) => {
         optionCopy[0].value = questionOne?.values?.[itemIndex + 1]?.value
       }
     } else if (direction === 'minus' && question === 'two') {
-      const item = questionTwo?.values?.find((item) => option[0].value === item.value)
+      const item = questionTwo?.values?.find((item) => option[1].value === item.value)
       const itemIndex = questionTwo?.values?.indexOf(item);
       if (itemIndex !== 0) {
         optionCopy[1].value = questionTwo?.values?.[itemIndex - 1]?.value
       }
     } else if (direction === 'plus' && question === 'two') {
-      const item = questionTwo?.values?.find((item) => option[0].value === item.value)
+      const item = questionTwo?.values?.find((item) => option[1].value === item.value)
       const itemIndex = questionTwo?.values?.indexOf(item);
       if (itemIndex !== questionTwo?.values?.length) {
         optionCopy[1].value = questionTwo?.values?.[itemIndex + 1]?.value

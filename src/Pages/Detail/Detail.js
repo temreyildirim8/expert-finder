@@ -27,7 +27,7 @@ const Detail = () => {
   // const { register, handleSubmit, errors } = useForm();
 
   useEffect(() => {
-    location?.state?.selectedService === 262 ? setQuestions(twoSixTwoQuestions) : setQuestions(threeNineNineQuestions)
+    Number(location?.state?.selectedService) === Number(262) ? setQuestions(twoSixTwoQuestions) : setQuestions(threeNineNineQuestions)
     const relatedService = location?.state?.selectedService && services.find((service) => Number(service.serviceId) === Number(location?.state?.selectedService))
     setCurrentService(relatedService);
   }, [location?.state?.selectedService]);
@@ -42,9 +42,9 @@ const Detail = () => {
   }, [questions]);
 
   const handleContinue = () => {
-    const currentQuestion = questions.find((question) => question.pageNumber === currentPage);
+    const currentQuestion = questions.find((question) => Number(question.pageNumber) ===  Number(currentPage));
     const answersCopy = [...answers]
-    const currentAnswer = answersCopy.find((answer) => answer.id === currentQuestion.id);
+    const currentAnswer = answersCopy.find((answer) => Number(answer.id) === Number(currentQuestion.id));
     if (!!currentAnswer && !!currentAnswerValue) {
       currentAnswer.value = currentAnswerValue
       increasePage(answersCopy)
@@ -66,7 +66,7 @@ const Detail = () => {
       setCurrentPage(currentPage + 1);
       setCurrentAnswerValue('')
     } else {
-      setTimeout(() => { history.push('/success'); }, 1000); // IT NEEDS TO BE SUCCESS PAGE
+      setTimeout(() => { history.push('/success'); }, 1000);
       setCurrentAnswerValue('')
     }
   }
@@ -87,27 +87,27 @@ const Detail = () => {
     return price && ` ${price.currency}`
   }
 
-  const getCurrentQuestions = () => {
+  const getCurrentQuestion = () => {
     return questions.filter((question) => 
       question.pageNumber === currentPage
     )
   }
 
   const getAnswers = () => {
-    const currentQuestion = questions.find((question) => question.pageNumber === currentPage);
+    const currentQuestion = questions.find((question) => Number(question.pageNumber) === Number(currentPage));
+    const currentQuestionIndex = questions.indexOf(currentQuestion);
 
-    if (currentQuestion && (currentQuestion?.typeId === Number(5) || currentQuestion?.typeId === Number(6))) {
+    if (currentQuestion && (Number(currentQuestion?.typeId) === Number(5) || Number(currentQuestion?.typeId) === Number(6))) {
       return ( 
-        <Five values={currentQuestion.values} changeEvent={handleAnswer}/>
+        <Five values={currentQuestion.values} changeEvent={handleAnswer} label={currentQuestion.label}/>
       )
-    } else if (currentQuestion && currentQuestion?.typeId === Number(8)) {
+    } else if (currentQuestion && Number(currentQuestion?.typeId) === Number(8)) {
       return( 
-        <Eight placeholder={currentQuestion.placeHolder} changeEvent={handleAnswer}/>
+        <Eight placeholder={currentQuestion.placeHolder} changeEvent={handleAnswer} label={currentQuestion.label}/>
       )
-    } else if (currentQuestion && currentQuestion?.typeId === Number(4)) {
+    } else if (currentQuestion && Number(currentQuestion?.typeId) === Number(4)) {
       return( 
-        null
-        // <Four /> // IT IS INCOMPLETE
+        <Four questionOne={currentQuestion} questionTwo={questions?.[currentQuestionIndex+1]} changeEvent={handleAnswer}/> // IT IS INCOMPLETE
       )
     } else {
       return null
@@ -146,16 +146,13 @@ const Detail = () => {
       </div> 
       : null }
       <div className='below-wrapper'>
-        {getCurrentQuestions() ? getCurrentQuestions().map((question) => (
-          <div className='question-wrapper' key={question.id}>
-            <div className='text'>
-              <span>{question.label}</span>
-            </div>
+        {getCurrentQuestion() ? (
+          <div className='question-wrapper'>
             <div className='answers'>
               {getAnswers()}
             </div>
           </div>
-        )) : null}
+        ) : null}
         <div className='warning'> {warning} </div>
         <div className='button-wrapper'>
           {/* questions?.[currentPage]?.label */}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Eight.scss";
 
-const Eight = ({ placeholder, changeEvent, required, ...otherProps }) => {
+const Eight = ({ placeholder, changeEvent, label, ...otherProps }) => {
   const [option, setOption] = useState('');
 
   const handleChange = (event) => {
@@ -11,9 +11,15 @@ const Eight = ({ placeholder, changeEvent, required, ...otherProps }) => {
   };
 
   return (
-    <section className='eight-wrapper'>
-        <textarea value={option} onChange={handleChange} placeholder={placeholder} rows={8} cols={40}/>
-    </section>
+    <>
+      <div className='text'>
+        <span>{label || ''}</span>
+      </div>
+      <section className='eight-wrapper'>
+
+          <textarea value={option} onChange={handleChange} placeholder={placeholder} rows={8} cols={40}/>
+      </section>
+    </>
   );
 };
 

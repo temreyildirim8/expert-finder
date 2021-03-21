@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import ProgressBar from "@ramonak/react-progress-bar";
 import "./Detail.scss";
@@ -12,6 +12,7 @@ import back from '../../Assets/Images/back.png';
 import close from '../../Assets/Images/close.png';
 
 import Five from '../../Components/Questions/Five/Five';
+import Eight from '../../Components/Questions/Eight/Eight';
 
 const Detail = () => {
   const location = useLocation();
@@ -19,9 +20,10 @@ const Detail = () => {
   const [questions, setQuestions] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [currentService, setCurrentService] = useState({});
-  // eslint-disable-next-line no-unused-vars
-  const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const [answers, setAnswers] = useState([]);
+  const [currentAnswerValue, setCurrentAnswerValue] = useState(undefined);
+  const [warning, setWarning] = useState('');
+  // const { register, handleSubmit, errors } = useForm();
 
   useEffect(() => {
     location?.state?.selectedService === 262 ? setQuestions(twoSixTwoQuestions) : setQuestions(threeNineNineQuestions)
@@ -39,11 +41,32 @@ const Detail = () => {
   }, [questions]);
 
   const handleContinue = () => {
-    // HANDLE REQUIRED VALUES ISSUE HERE
+    const currentQuestion = questions.find((question) => question.pageNumber === currentPage);
+    const answersCopy = [...answers]
+    const currentAnswer = answersCopy.find((answer) => answer.id === currentQuestion.id);
+    if (!!currentAnswer && !!currentAnswerValue) {
+      currentAnswer.value = currentAnswerValue
+      increasePage(answersCopy)
+    } else if (!currentAnswer && !!currentAnswerValue) {
+      answersCopy.push({
+        id: currentQuestion.id,
+        value: currentAnswerValue
+      })
+      increasePage(answersCopy)
+
+    } else if (!currentAnswerValue && !!currentQuestion?.required) {
+      setWarning('Bu alan zorunludur')
+    }
+  }
+
+  const increasePage = (answersCopy) => {
+    setAnswers(answersCopy);
     if (currentPage !== questions[questions.length - 1]?.pageNumber) {
       setCurrentPage(currentPage + 1);
+      setCurrentAnswerValue('')
     } else {
       setTimeout(() => { history.push('/'); }, 1000); // IT NEEDS TO BE SUCCESS PAGE
+      setCurrentAnswerValue('')
     }
   }
 
@@ -72,14 +95,21 @@ const Detail = () => {
   const getAnswers = () => {
     const currentQuestion = questions.find((question) => question.pageNumber === currentPage);
 
-    if (currentQuestion && currentQuestion.typeId === Number(5)) {
+    if (currentQuestion && currentQuestion?.typeId === Number(5)) {
       return ( 
-        <Five values={currentQuestion.values} required={currentQuestion.required} changeEvent={handleAnswer}/>
+        <Five values={currentQuestion.values} changeEvent={handleAnswer}/>
       )
-    } else if (currentQuestion && currentQuestion.typeId === Number(8)) {
+    } else if (currentQuestion && currentQuestion?.typeId === Number(8)) {
       return( 
-        <div className='eight-wrapper'>
-          <textarea value='' onChange={handleAnswer} placeholder={currentQuestion.placeHolder} rows={8} cols={40}/>
+        <Eight placeholder={currentQuestion.placeHolder} changeEvent={handleAnswer}/>
+      )
+    } else if (currentQuestion && currentQuestion?.typeId === Number(13)) {
+      return( 
+        <div className='four-wrapper'>
+          {/* + and - images here and current value as text in center,  
+          first element of the values will be set as default value,
+          values will be array,
+          if + button clicked increase selected index of array and vice versa */}
         </div>
       )
     } else {
@@ -88,7 +118,7 @@ const Detail = () => {
   }
 
   const handleAnswer = (value) => {
-    // Handle answer, this function can be dynamic according to answers
+    setCurrentAnswerValue(value)
   }
 
   return (
@@ -118,7 +148,7 @@ const Detail = () => {
         {/* Handle '%17' green color issue via regexp */}
       </div> 
       : null }
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <div className='below-wrapper'>
         {getCurrentQuestions() ? getCurrentQuestions().map((question) => (
           <div className='question-wrapper' key={question.id}>
             <div className='text'>
@@ -129,11 +159,12 @@ const Detail = () => {
             </div>
           </div>
         )) : null}
+        <div className='warning'> {warning} </div>
         <div className='button-wrapper'>
           {/* questions?.[currentPage]?.label */}
           <button onClick={handleContinue}> {currentPage !== questions[questions.length - 1]?.pageNumber ? 'DEVAM' : 'TALEP GÖNDER'}  </button> {/* It needs to be localized in a file like constants.js */}
         </div>
-      </form>
+      </div>
     </section>
   );
 };

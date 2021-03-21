@@ -68,7 +68,7 @@ $marginDefault: 5%;
     font-size: 14px;
   }
 
-  form {
+  .below-wrapper {
     .question-wrapper {
 
       .text {
@@ -79,12 +79,9 @@ $marginDefault: 5%;
       }
     }
 
-    .eight-wrapper {
-      width: 90%;
-      margin: 0 auto;
-      textarea {
-        padding: 5px;
-      }
+    .warning {
+      font-size: 16px;
+      color: red;
     }
 
     .button-wrapper {

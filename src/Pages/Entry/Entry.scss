@@ -1,0 +1,25 @@
+$myColor: blue;
+
+h2 {
+  color: $myColor;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  margin: 20px;
+
+  form { 
+    margin: 0 auto;
+    width: 80%;
+
+    select {
+      width: 100%;
+      padding: 10px;
+    }
+  }
+}
+

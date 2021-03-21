@@ -1,0 +1,109 @@
+$marginDefault: 5%;
+
+.wrapper-detail {
+  display: flex;
+  flex-direction: column;
+  margin: 0 $marginDefault;
+  width: 90%;
+  height: 150vh; // It needs to be handled pro
+
+  .top { 
+    width: 100%;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  
+  .progress {
+    width: 110%;
+    margin-left: -5%;
+  }
+  
+  .prices {
+    font-weight: bold;
+    padding: 1.2rem 1rem; // will be handled with price of service
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .left {
+      font-size: 12px;
+    }
+
+    .right {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+      .number {
+        font-size: 16px;
+        margin-right: 3px;
+      }
+  
+      .currency {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .gray-border {
+    width: 110%;
+    margin-left: -5%;
+    border-bottom: 1px solid #e1e1e2;
+  }
+
+  .discount {
+    width: 110%;
+    margin-left: -5%;
+    padding: 1rem 0;
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  form {
+    .question-wrapper {
+
+      .text {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 1.5rem 0;
+      }
+    }
+
+    .eight-wrapper {
+      width: 90%;
+      margin: 0 auto;
+      textarea {
+        padding: 5px;
+      }
+    }
+
+    .button-wrapper {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 94%;
+      margin: 0 3% 2%;
+
+      button {
+        width: 100%;
+        height: 50px;
+        background: #2CB34F;
+        color: #ffffff;
+        border: none;
+        border-radius: 3px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -47,15 +47,13 @@ const Detail = () => {
     const currentAnswer = answersCopy.find((answer) => Number(answer.id) === Number(currentQuestion.id));
     if (!!currentAnswer && !!currentAnswerValue) {
       currentAnswer.value = currentAnswerValue
-      increasePage(answersCopy)
     } else if (!currentAnswer && !!currentAnswerValue) {
       answersCopy.push({
         id: currentQuestion.id,
         value: currentAnswerValue
       })
-      increasePage(answersCopy)
-
     } 
+    increasePage(answersCopy)
     // else if (!currentAnswerValue && !!currentQuestion?.required) {
     //   setWarning('Bu alan zorunludur')
     // }

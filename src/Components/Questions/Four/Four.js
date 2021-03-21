@@ -27,7 +27,7 @@ const Four = ({ questionOne, questionTwo, changeEvent, ...otherProps }) => {
     } else if (direction === 'plus' && question === 'one') {
       const item = questionOne?.values?.find((item) => option[0].value === item.value)
       const itemIndex = questionOne?.values?.indexOf(item);
-      if (itemIndex !== questionOne?.values?.length) {
+      if (itemIndex !== questionOne?.values?.length - 1) {
         optionCopy[0].value = questionOne?.values?.[itemIndex + 1]?.value
       }
     } else if (direction === 'minus' && question === 'two') {
@@ -39,7 +39,7 @@ const Four = ({ questionOne, questionTwo, changeEvent, ...otherProps }) => {
     } else if (direction === 'plus' && question === 'two') {
       const item = questionTwo?.values?.find((item) => option[1].value === item.value)
       const itemIndex = questionTwo?.values?.indexOf(item);
-      if (itemIndex !== questionTwo?.values?.length) {
+      if (itemIndex !== questionTwo?.values?.length - 1) {
         optionCopy[1].value = questionTwo?.values?.[itemIndex + 1]?.value
       }
     } 

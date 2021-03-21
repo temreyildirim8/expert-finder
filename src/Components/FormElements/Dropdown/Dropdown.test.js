@@ -51,34 +51,6 @@ describe ('Test react-select component', () => {
 
     });
 
-    it('should call onChange when the first option is selected then second option then the 9th one', async () => {
-        const mockedOnChange = jest.fn();
-        const { getByText, queryByTestId } = render(<Dropdown 
-            options={mockedOptions} 
-            onChange={mockedOnChange} />);
-
-        const mySelectComponent = queryByTestId('my-select-component');
-
-        expect(mySelectComponent).toBeDefined();
-        expect(mySelectComponent).not.toBeNull();
-        expect(mockedOnChange).toHaveBeenCalledTimes(0);
-
-        fireEvent.keyDown(mySelectComponent.firstChild, { key: 'ArrowDown' });
-        await waitForElement(() => getByText('Mocked option 1'));
-        fireEvent.click(getByText('Mocked option 1'));
-
-        fireEvent.keyDown(mySelectComponent.firstChild, { key: 'ArrowDown' });
-        await waitForElement(() => getByText('Mocked option 2'));
-        fireEvent.click(getByText('Mocked option 2'));
-
-        fireEvent.keyDown(mySelectComponent.firstChild, { key: 'ArrowDown' });
-        await waitForElement(() => getByText('Mocked option 9'));
-        fireEvent.click(getByText('Mocked option 9'));
-
-        expect(mockedOnChange).toHaveBeenCalledTimes(3);
-        expect(mockedOnChange).toHaveBeenCalledWith({label: 'Mocked option 9', value: 'mocked-option-9'});
-    });
-
     it('should call onChange when filtering by input value', async () => {
       const mockedOnChange = jest.fn();
       const { getByText, queryByTestId, container } = render(<Dropdown 

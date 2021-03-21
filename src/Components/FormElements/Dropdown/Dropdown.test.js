@@ -23,7 +23,7 @@ describe ('Test react-select component', () => {
         const mockedOnChange = jest.fn();
         const { getByText } = render(<Dropdown 
             options={mockedOptions} 
-            onChange={mockedOnChange} />);
+            changeEvent={mockedOnChange} />);
 
         const placeholder = getByText('Select an option');
 
@@ -34,7 +34,7 @@ describe ('Test react-select component', () => {
         const mockedOnChange = jest.fn();
         const { getByText, queryByTestId } = render(<Dropdown 
             options={mockedOptions} 
-            onChange={mockedOnChange} />);
+            changeEvent={mockedOnChange} />);
 
         const mySelectComponent = queryByTestId('my-select-component');
 
@@ -55,7 +55,7 @@ describe ('Test react-select component', () => {
       const mockedOnChange = jest.fn();
       const { getByText, queryByTestId, container } = render(<Dropdown 
         options={mockedOptions} 
-        onChange={mockedOnChange} />);
+        changeEvent={mockedOnChange} />);
 
         const mySelectComponent = queryByTestId('my-select-component');
 

@@ -66,7 +66,7 @@ const Detail = () => {
       setCurrentPage(currentPage + 1);
       setCurrentAnswerValue('')
     } else {
-      setTimeout(() => { history.push('/'); }, 1000); // IT NEEDS TO BE SUCCESS PAGE
+      setTimeout(() => { history.push('/success'); }, 1000); // IT NEEDS TO BE SUCCESS PAGE
       setCurrentAnswerValue('')
     }
   }

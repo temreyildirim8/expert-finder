@@ -20,7 +20,7 @@ const Five = ({ values, changeEvent, ...otherProps }) => {
     <section className='type-five-wrapper'>
       {values ? values.map((value) => (
         <div className='type-five' onClick={() => handleChange(value.id)} key={value.id}>
-          <div className='image'><img alt='' src={value.valueImageUrl}/></div>
+          {value.valueImageUrl ? <div className='image'><img alt='' src={value.valueImageUrl}/></div> : null}
           <div className='bottom'>
             <input type="radio" value={value.id} name="gender" checked={option === value.id} onChange={handlerRadioChange}/> 
             <span> {value.value}</span>

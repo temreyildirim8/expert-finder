@@ -13,6 +13,7 @@ import close from '../../Assets/Images/close.png';
 
 import Five from '../../Components/Questions/Five/Five';
 import Eight from '../../Components/Questions/Eight/Eight';
+import Four from '../../Components/Questions/Four/Four';
 
 const Detail = () => {
   const location = useLocation();
@@ -95,7 +96,7 @@ const Detail = () => {
   const getAnswers = () => {
     const currentQuestion = questions.find((question) => question.pageNumber === currentPage);
 
-    if (currentQuestion && currentQuestion?.typeId === Number(5)) {
+    if (currentQuestion && (currentQuestion?.typeId === Number(5) || currentQuestion?.typeId === Number(6))) {
       return ( 
         <Five values={currentQuestion.values} changeEvent={handleAnswer}/>
       )
@@ -103,14 +104,10 @@ const Detail = () => {
       return( 
         <Eight placeholder={currentQuestion.placeHolder} changeEvent={handleAnswer}/>
       )
-    } else if (currentQuestion && currentQuestion?.typeId === Number(13)) {
+    } else if (currentQuestion && currentQuestion?.typeId === Number(4)) {
       return( 
-        <div className='four-wrapper'>
-          {/* + and - images here and current value as text in center,  
-          first element of the values will be set as default value,
-          values will be array,
-          if + button clicked increase selected index of array and vice versa */}
-        </div>
+        null
+        // <Four /> // IT IS INCOMPLETE
       )
     } else {
       return null

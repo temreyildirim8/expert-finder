@@ -55,9 +55,10 @@ const Detail = () => {
       })
       increasePage(answersCopy)
 
-    } else if (!currentAnswerValue && !!currentQuestion?.required) {
-      setWarning('Bu alan zorunludur')
-    }
+    } 
+    // else if (!currentAnswerValue && !!currentQuestion?.required) {
+    //   setWarning('Bu alan zorunludur')
+    // }
   }
 
   const increasePage = (answersCopy) => {
@@ -153,7 +154,7 @@ const Detail = () => {
             </div>
           </div>
         ) : null}
-        <div className='warning'> {warning} </div>
+        {/* <div className='warning'> {warning} </div> */}
         <div className='button-wrapper'>
           {/* questions?.[currentPage]?.label */}
           <button onClick={handleContinue}> {currentPage !== questions[questions.length - 1]?.pageNumber ? 'DEVAM' : 'TALEP GÖNDER'}  </button> {/* It needs to be localized in a file like constants.js */}

@@ -23,7 +23,7 @@ const Detail = () => {
   const [currentService, setCurrentService] = useState({});
   const [answers, setAnswers] = useState([]);
   const [currentAnswerValue, setCurrentAnswerValue] = useState(undefined);
-  const [warning, setWarning] = useState('');
+  // const [warning, setWarning] = useState('');
   // const { register, handleSubmit, errors } = useForm();
 
   useEffect(() => {

@@ -14,6 +14,7 @@ import close from '../../Assets/Images/close.png';
 import Five from '../../Components/Questions/Five/Five';
 import Eight from '../../Components/Questions/Eight/Eight';
 import Four from '../../Components/Questions/Four/Four';
+import { array } from 'yup';
 
 const Detail = () => {
   const location = useLocation();
@@ -114,6 +115,9 @@ const Detail = () => {
   }
 
   const handleAnswer = (value) => {
+    if (value === typeof(array)) {
+      // Handle differently, like fourth type questions
+    }
     setCurrentAnswerValue(value)
   }
 
